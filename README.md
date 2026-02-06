@@ -7,7 +7,7 @@ A modular, opinionated Playwright boilerplate generator using TypeScript, Page O
 Run this in Bash to set up a full Playwright framework in the current directory:
 
 ```bash
-curl -sSL [https://raw.githubusercontent.com/asteria-dev/playwright-setup/main/setup.sh](https://raw.githubusercontent.com/asteria-dev/playwright-setup/main/setup.sh) | bash
+curl -sSL https://raw.githubusercontent.com/asteria-dev/playwright-setup/main/setup.sh | bash
 ```
 
 ### What this does:
@@ -28,7 +28,7 @@ The framework enforces a strict separation of concerns:
 ├── 📁 e2e/              # Test files (*.spec.ts)
 ├── 📁 fixtures/         # Playwright test fixtures
 ├── 📁 helpers/
-│   ├── 📁 const/        # Static constants & selectors
+│   ├── 📁 const/        # Static constants + derived types
 │   ├── 📁 models/       # TypeScript interfaces/types
 │   └── 📁 utils/        # Shared helper functions
 ├── 📁 pages/            # Page Objects
@@ -97,4 +97,5 @@ test('should login successfully', async ({ page }) => {
 });
 
 ```
+
 
