@@ -15,7 +15,7 @@ curl -sSL https://raw.githubusercontent.com/asteria-dev/playwright-setup/main/se
 2.  Installs **Playwright**, **TypeScript**, and **ESLint** (Flat Config).
 3.  Creates the **folder structure** (POM, helpers, fixtures).
 4.  Configures **path aliases** (`@pages`, `@utils`, etc.).
-5.  Sets up **Dotenv** to load from `config/*.env`.
+5.  Sets up **Dotenv** to load from `config/.env.*`.
 
 ---
 
@@ -24,7 +24,7 @@ curl -sSL https://raw.githubusercontent.com/asteria-dev/playwright-setup/main/se
 The framework enforces a strict separation of concerns:
 
 ```text
-├── 📁 config/           # Environment variables (test.env, staging.env)
+├── 📁 config/           # Environment variables (.env.test, .env.staging)
 ├── 📁 e2e/              # Test files (*.spec.ts)
 ├── 📁 fixtures/         # Playwright test fixtures
 ├── 📁 helpers/
@@ -55,11 +55,10 @@ Avoid "dot-hell" (`../../`) by using pre-configured aliases in `tsconfig.json`:
 
 ### 2. Environment Management
 The `playwright.config.ts` is set up to load environment variables dynamically.
-* **Default:** Loads `config/test.env`
-* **Custom:** Run with `ENV=staging` to load `config/staging.env`
-
+* **Default:** Loads `config/.env.test`
+* **Custom:** Run with `ENV=staging` to load `config/.env.staging
 ```bash
-# Run tests using config/staging.env
+# Run tests using config/.env.staging
 ENV=staging npm test
 ```
 
@@ -92,10 +91,8 @@ test('should login successfully', async ({ page }) => {
     const loginPage = new LoginPage(page);
     await loginPage.navigate();
     await loginPage.login(USER_DATA.admin);
-    
+
     await expect(page).toHaveURL(/dashboard/);
 });
 
 ```
-
-

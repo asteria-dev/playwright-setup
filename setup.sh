@@ -17,7 +17,7 @@ npx playwright install --with-deps
 # 5. Create Folder Structure
 mkdir -p e2e pages helpers/const helpers/models fixtures helpers/utils config
 
-# 6. Create playwright.config.ts (Preserving all comments)
+# 6. Create playwright.config.ts
 cat <<EOF > playwright.config.ts
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
@@ -27,11 +27,11 @@ import path from 'path';
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
  */
-/* Set default env to config.test.env */
+/* Set default env to config/.env.test */
 const ENV = process.env.ENV || 'test';
 
 dotenv.config({
-    path: path.resolve(__dirname, 'config', \`\${ENV}.env\`)
+    path: path.resolve(__dirname, 'config', \`.env.\${ENV}\`)
 });
 
 /**
@@ -165,7 +165,7 @@ export default defineConfig(
 EOF
 
 # 9. Create Environment Config
-echo "BASE_URL=https://yourtestapp.com" > config/test.env
+echo "BASE_URL=https://yourtestapp.com" > config/.env.test
 
 # 10. Create .gitignore
 cat <<EOF > .gitignore
@@ -177,8 +177,9 @@ node_modules/
 /playwright/.cache/
 /playwright/.auth/
 
-config/
-*.env
+# Environment Variables
+.env*
+!.env.example
 EOF
 
 # 11. Update Package Scripts
